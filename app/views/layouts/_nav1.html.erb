@@ -12,8 +12,10 @@
         <span class="font-medium">Hello, <%= current_user.username %></span>
         <li><%= link_to 'Admin Products', admin_products_path %></li>
         <li><%= link_to 'Add Product', new_admin_product_path%></li>
+        <li><%= link_to 'Orders', admin_orders_path%></li>
         <li><%= link_to 'About/Contact', edit_pages_path %></li>
-        <%= link_to 'Tax Rates', admin_provinces_path, class: 'btn btn-info' %>
+        <l1><%= link_to 'Tax Rates', admin_provinces_path, class: 'btn btn-info' %></li>
+
         
         <%= link_to "Logout", logout_path, method: :delete, data: { turbo_method: :delete }, class: "hover:underline hover:text-red-300" %>
       <% else %>
