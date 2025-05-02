@@ -8,8 +8,17 @@ class Order < ApplicationRecord
   validates :province_id, presence: true
   validates :total_price, numericality: { greater_than_or_equal_to: 0 }
 
-  # Status enum - corrected syntax
+  STATUSES = %w[pending paid shipped delivered cancelled].freeze
+
+  # Add validation for status
+  validates :status, inclusion: { in: STATUSES }
+  
+
+ 
+
+
  
 
   accepts_nested_attributes_for :order_items
+  scope :recent, -> { order(created_at: :desc) }
 end
