@@ -7,22 +7,21 @@
     </div>
 
     <!-- Navigation Links -->
-    <div class="flex items-center space-x-6 text-sm md:text-base">
+    <ul class="flex items-center space-x-6 text-sm md:text-base">
       <% if user_signed_in? %>
-        <span class="font-medium">Hello, <%= current_user.username %></span>
-        <li><%= link_to 'Admin Products', admin_products_path %></li>
-        <li><%= link_to 'Add Product', new_admin_product_path%></li>
-        <li><%= link_to 'Orders', admin_orders_path%></li>
-        <li><%= link_to 'About/Contact', edit_pages_path %></li>
-        <l1><%= link_to 'Tax Rates', admin_provinces_path, class: 'btn btn-info' %></li>
-
-        
-        <%= link_to "Logout", logout_path, method: :delete, data: { turbo_method: :delete }, class: "hover:underline hover:text-red-300" %>
+        <li class="font-medium">Hello, <%= current_user.username %></li>
+        <li><%= link_to 'Admin Products', admin_products_path, class: "hover:text-yellow-300 transition" %></li>
+        <li><%= link_to 'Add Product', new_admin_product_path, class: "hover:text-yellow-300 transition" %></li>
+        <li><%= link_to 'Orders', admin_orders_path, class: "hover:text-yellow-300 transition" %></li>
+        <li><%= link_to 'About/Contact', edit_pages_path, class: "hover:text-yellow-300 transition" %></li>
+        <li><%= link_to 'Tax Rates', admin_provinces_path, class: "hover:text-yellow-300 transition" %></li>
+        <li>
+          <%= link_to "Logout", logout_path, method: :delete, data: { turbo_method: :delete }, class: "hover:text-red-300 transition" %>
+        </li>
       <% else %>
-        <%= link_to "Login", login_path, class: "hover:underline hover:text-green-300" %>
-        <%= link_to "Signup", signup_path, class: "hover:underline hover:text-green-300" %>
+        <li><%= link_to "Login", login_path, class: "hover:text-green-300 transition" %></li>
+        <li><%= link_to "Signup", signup_path, class: "hover:text-green-300 transition" %></li>
       <% end %>
-    </div>
+    </ul>
   </div>
 </nav>
-

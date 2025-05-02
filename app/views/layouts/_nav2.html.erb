@@ -1,27 +1,65 @@
-<nav class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-md py-4" aria-label="Main navigation">
-  <div class="container mx-auto flex justify-between items-center px-4">
-    
-    <!-- Logo / Site name -->
-    <div class="text-2xl font-extrabold tracking-wide">
-      <%= link_to "Ecommerce", root_path, class: "hover:text-yellow-300 transition-colors duration-200" %>
+<nav class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-md" aria-label="Main navigation">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <!-- Logo -->
+      <div class="flex-shrink-0 text-2xl font-extrabold">
+        <%= link_to "Ecommerce", root_path, class: "hover:text-yellow-300 transition duration-300" %>
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex space-x-6 items-center text-sm md:text-base">
+        <% if user_signed_in? %>
+          <span class="font-medium">Hello, <%= current_user.username %></span>
+          <%= link_to "Products", products_path, class: "hover:text-yellow-300 transition" %>
+          <%= link_to "Cart", cart_path, class: "hover:text-yellow-300 transition" %>
+          <%= link_to "Orders", orders_path, class: "hover:text-yellow-300 transition" %>
+          <%= link_to "Logout", logout_path, method: :delete, data: { turbo_method: :delete }, class: "hover:text-red-300 transition" %>
+        <% else %>
+          <%= link_to "Login", login_path, class: "hover:text-green-300 transition" %>
+          <%= link_to "Signup", signup_path, class: "hover:text-green-300 transition" %>
+          <%= link_to "About", about_path, class: "hover:text-green-300 transition" %>
+          <%= link_to "Contact", contact_path, class: "hover:text-green-300 transition" %>
+          <%= link_to "Home", root_path, class: "hover:text-green-300 transition" %>
+        <% end %>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button id="mobile-menu-button" class="text-white focus:outline-none">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
     </div>
 
-    <!-- Navigation Links -->
-    <div class="flex items-center space-x-6 text-sm md:text-base">
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden mt-2 space-y-2 pb-4 text-sm">
       <% if user_signed_in? %>
-        <span class="font-medium">Hello, <%= current_user.username %></span>
-        <%= link_to "Products", products_path, class: "hover:underline hover:text-yellow-300" %>
-        <%= link_to "Cart", cart_path, class: "hover:underline hover:text-yellow-300" %>
-        <%= link_to "Orders", orders_path, class: "hover:underline hover:text-yellow-300" %>
-        <%= link_to "Logout", logout_path, method: :delete, data: { turbo_method: :delete }, class: "hover:underline hover:text-red-300" %>
+        <span class="block px-2 font-medium">Hello, <%= current_user.username %></span>
+        <%= link_to "Products", products_path, class: "block px-2 hover:text-yellow-300 transition" %>
+        <%= link_to "Cart", cart_path, class: "block px-2 hover:text-yellow-300 transition" %>
+        <%= link_to "Orders", orders_path, class: "block px-2 hover:text-yellow-300 transition" %>
+        <%= link_to "Logout", logout_path, method: :delete, data: { turbo_method: :delete }, class: "block px-2 hover:text-red-300 transition" %>
       <% else %>
-        <%= link_to "Login", login_path, class: "hover:underline hover:text-green-300" %>
-        <%= link_to "Signup", signup_path, class: "hover:underline hover:text-green-300" %>
-        <%= link_to "About", about_path, class: "hover:underline hover:text-green-300" %>
-        <%= link_to "Contact", contact_path, class: "hover:underline hover:text-green-300" %>
-        <%= link_to "Home", root_path, class: "hover:underline hover:text-green-300" %>
+        <%= link_to "Login", login_path, class: "block px-2 hover:text-green-300 transition" %>
+        <%= link_to "Signup", signup_path, class: "block px-2 hover:text-green-300 transition" %>
+        <%= link_to "About", about_path, class: "block px-2 hover:text-green-300 transition" %>
+        <%= link_to "Contact", contact_path, class: "block px-2 hover:text-green-300 transition" %>
+        <%= link_to "Home", root_path, class: "block px-2 hover:text-green-300 transition" %>
       <% end %>
     </div>
-    
   </div>
 </nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const button = document.getElementById("mobile-menu-button");
+    const menu = document.getElementById("mobile-menu");
+
+    button.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+  });
+</script>
